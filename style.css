@@ -1,12 +1,74 @@
 body{
-
 background-color: black;
+}
 
+strong{
+    color:skyblue;
+}
 
+h1{color:white;
+    font-size: 50px;
+}
 
-
+p{margin:40px 0 50px 0;
+    color:white;
+    font-size: 40px;
 }
 
 
-h1{color:white
-}
+
+main{
+    display:flex;
+    padding: 0 200px 0 0;
+  }
+
+  .botao-esquerda {
+    text-align: left;
+  }
+
+  header,footer{
+    height: 100px;
+  }
+
+  .botao-personalizado {
+    /* Tamanho */
+    width: 150px; /* Largura */
+    height: 50px; /* Altura */
+    font-size: 16px; /* Tamanho da fonte */
+    padding: 10px 20px; /* Espaçamento interno */
+  
+    /* Cor */
+    background-color: #007bff; /* Cor de fundo */
+    color: white; /* Cor do texto */
+    border: none; /* Remove a borda padrão */
+    border-radius: 5px; /* Arredonda os cantos */
+  
+    /* Outros */
+    cursor: pointer; /* Muda o cursor ao passar o mouse */
+  }
+  
+  .botao-personalizado:hover {
+    background-color: #0056b3; /* Cor de fundo ao passar o mouse */
+  }
+
+
+  .botao-personalizado2 {
+    /* Tamanho */
+    width: 150px; /* Largura */
+    height: 50px; /* Altura */
+    font-size: 16px; /* Tamanho da fonte */
+    padding: 10px 20px; /* Espaçamento interno */
+  
+    /* Cor */
+    background-color: #007bff; /* Cor de fundo */
+    color: white; /* Cor do texto */
+    border: none; /* Remove a borda padrão */
+    border-radius: 5px; /* Arredonda os cantos */
+  
+    /* Outros */
+    cursor: pointer; /* Muda o cursor ao passar o mouse */
+  }
+  
+  .botao-personalizado2:hover {
+    background-color: #0056b3; /* Cor de fundo ao passar o mouse */
+  }
