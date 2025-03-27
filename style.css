@@ -1,5 +1,6 @@
-body{
+  body{
 background-color: black;
+color: aliceblue;
 }
 
 strong{
@@ -7,7 +8,7 @@ strong{
 }
 
 h1{color:white;
-    font-size: 50px;
+    font-size: 50px;  
 }
 
 p{margin:40px 0 50px 0;
@@ -71,4 +72,21 @@ main{
   
   .botao-personalizado2:hover {
     background-color: #0056b3; /* Cor de fundo ao passar o mouse */
+  }
+
+  a{color: black;
+  font-size: 16px;
+text-decoration: none;
+  }
+
+  img{
+    padding: 0 50px 0 0px;
+  }
+  
+  .botao-personalizado:first-child {
+    margin-right: 20px; /* Cria um espaço de 20 pixels à direita do primeiro botão */
+  }
+
+  .botao-personalizado2:first-child {
+    margin-right: 20px; /* Cria um espaço de 20 pixels à direita do primeiro botão */
   }
