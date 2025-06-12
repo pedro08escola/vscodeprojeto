@@ -1,92 +1,186 @@
-  body{
-background-color: black;
-color: aliceblue;
+/* VARIÁVEIS GLOBAIS */
+:root {
+    --branco-principal: #FFFFFF; /* Cor branca principal do texto e botões */
+    --botao-azul: #167BF7; /* Cor azul padrão dos botões */
+    --cor-de-fundo: #00030C; /* Cor de fundo do site */
+    --cinza-secundario: #C0C0C0; /* Cor cinza para avisos e textos secundários */
+    --fonte-principal: 'Inter', sans-serif; /* Fonte principal usada no site */
 }
 
-strong{
-    color:skyblue;
+/* CONFIGURAÇÕES GERAIS */
+body {
+    background-color: var(--cor-de-fundo); /* Cor de fundo */
+    color: var(--branco-principal); /* Cor padrão do texto */
+    font-family: var(--fonte-principal); /* Fonte padrão */
+    font-size: 16px; /* Tamanho padrão da fonte */
+    font-weight: 400; /* Peso padrão da fonte */
+    margin: 0; /* Remove margens padrão */
+    padding: 0; /* Remove espaçamentos padrão */
 }
 
-h1{color:white;
-    font-size: 50px;  
+/* SEÇÃO PRINCIPAL (CAPA) */
+.principal {
+    background-image: url("img/Background (1).png"); /* Imagem de fundo */
+    background-repeat: no-repeat; /* Não repetir a imagem */
+    background-size: cover; /* Imagem cobre toda a seção */
+    background-position: center; /* Centraliza a imagem */
+    text-align: center; /* Centraliza texto */
+    display: flex; /* Ativa flexbox */
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: center; /* Centraliza horizontalmente */
+    height: 100vh; /* Ocupa toda a altura da tela */
+    animation: fadeIn 2s; /* Animação de entrada */
 }
 
-p{margin:40px 0 50px 0;
-    color:white;
-    font-size: 40px;
+.container__caixa {
+    display: flex; /* Ativa flexbox */
+    flex-direction: column; /* Coluna vertical */
+    align-items: center; /* Centraliza os itens */
+    gap: 1em; /* Espaçamento entre os itens */
+    max-width: 600px; /* Largura máxima */
 }
 
+.container__titulo {
+    font-size: 3rem; /* Tamanho grande para o título */
+    font-weight: 700; /* Peso forte (negrito) */
+}
 
+.container__subtitulo {
+    font-size: 1.5rem; /* Tamanho do subtítulo */
+    margin-bottom: 1em; /* Espaço inferior */
+}
 
-main{
-    display:flex;
-    padding: 0 200px 0 0;
-  }
+.container__botao {
+    background-color: var(--botao-azul); /* Cor de fundo do botão */
+    border-radius: 5px; /* Bordas arredondadas */
+    padding: 1em 2em; /* Espaçamento interno */
+    color: var(--branco-principal); /* Cor do texto */
+    text-decoration: none; /* Remove sublinhado */
+    font-weight: bold; /* Negrito */
+    margin-bottom: 0.5em; /* Espaço inferior */
+    transition: background-color 0.3s; /* Animação no hover */
+}
 
-  .botao-esquerda {
-    text-align: left;
-  }
+.container__botao:hover {
+    background-color: #0f5dc2; /* Cor ao passar o mouse */
+}
 
-  header,footer{
-    height: 100px;
-  }
+.botao__secundario {
+    background-color: transparent; /* Botão sem cor de fundo */
+    border: 2px solid var(--branco-principal); /* Borda branca */
+}
 
-  .botao-personalizado {
-    /* Tamanho */
-    width: 150px; /* Largura */
-    height: 50px; /* Altura */
-    font-size: 16px; /* Tamanho da fonte */
-    padding: 10px 20px; /* Espaçamento interno */
-  
-    /* Cor */
-    background-color: #007bff; /* Cor de fundo */
-    color: white; /* Cor do texto */
-    border: none; /* Remove a borda padrão */
-    border-radius: 5px; /* Arredonda os cantos */
-  
-    /* Outros */
-    cursor: pointer; /* Muda o cursor ao passar o mouse */
-  }
-  
-  .botao-personalizado:hover {
-    background-color: #0056b3; /* Cor de fundo ao passar o mouse */
-  }
+.botao__secundario:hover {
+    background-color: var(--branco-principal); /* Fundo branco no hover */
+    color: var(--cor-de-fundo); /* Texto escuro no hover */
+}
 
+.container__aviso {
+    font-size: 12px; /* Tamanho pequeno para aviso */
+    color: var(--cinza-secundario); /* Cor cinza */
+}
 
-  .botao-personalizado2 {
-    /* Tamanho */
-    width: 150px; /* Largura */
-    height: 50px; /* Altura */
-    font-size: 16px; /* Tamanho da fonte */
-    padding: 10px 20px; /* Espaçamento interno */
-  
-    /* Cor */
-    background-color: #007bff; /* Cor de fundo */
-    color: white; /* Cor do texto */
-    border: none; /* Remove a borda padrão */
-    border-radius: 5px; /* Arredonda os cantos */
-  
-    /* Outros */
-    cursor: pointer; /* Muda o cursor ao passar o mouse */
-  }
-  
-  .botao-personalizado2:hover {
-    background-color: #0056b3; /* Cor de fundo ao passar o mouse */
-  }
+/* SEÇÕES SECUNDÁRIAS (PLATAFORMAS E DOWNLOAD) */
+.secundaria, .download {
+    display: flex; /* Ativa flexbox */
+    flex-wrap: wrap; /* Itens podem quebrar linha */
+    align-items: center; /* Alinha verticalmente */
+    justify-content: center; /* Centraliza horizontalmente */
+    padding: 4em 2em; /* Espaçamento interno */
+    gap: 2em; /* Espaçamento entre itens */
+    animation: fadeIn 2s; /* Animação de entrada */
+}
 
-  a{color: black;
-  font-size: 16px;
-text-decoration: none;
-  }
+.secundaria__imagem {
+    width: 80%; /* Largura responsiva */
+    max-width: 400px; /* Largura máxima */
+}
 
-  img{
-    padding: 0 50px 0 0px;
-  }
-  
-  .botao-personalizado:first-child {
-    margin-right: 20px; /* Cria um espaço de 20 pixels à direita do primeiro botão */
-  }
+.container__descricao {
+    max-width: 600px; /* Limita a largura */
+}
 
-  .botao-personalizado2:first-child {
-    margin-right: 20px; /* Cria um espaço de 20 pixels à direita do primeiro botão */
-  }
+.descricao__titulo {
+    font-size: 2.5rem; /* Tamanho grande do título */
+    font-weight: 700; /* Negrito */
+    margin-bottom: 0.5em; /* Espaçamento inferior */
+}
+
+.descricao__texto {
+    font-size: 1.2rem; /* Tamanho de texto confortável */
+    line-height: 1.5; /* Espaçamento entre linhas */
+}
+
+/* SEÇÃO BENEFÍCIOS */
+.beneficios {
+    text-align: center; /* Centraliza texto */
+    padding: 4em 2em; /* Espaçamento interno */
+    background-color: #121212; /* Fundo escuro */
+    animation: fadeIn 2s; /* Animação de entrada */
+}
+
+.beneficios__titulo {
+    font-size: 2.5rem; /* Tamanho grande */
+    margin-bottom: 1em; /* Espaço inferior */
+}
+
+.beneficios__texto {
+    font-size: 1.2rem; /* Tamanho confortável */
+    max-width: 800px; /* Largura máxima */
+    margin: 0 auto 2em auto; /* Centraliza e dá espaço inferior */
+}
+
+/* SEÇÃO DISPOSITIVOS */
+.dispositivos {
+    text-align: center; /* Centraliza conteúdo */
+    padding: 4em 2em; /* Espaçamento interno */
+    animation: fadeIn 2s; /* Animação de entrada */
+}
+
+.dispositivos__lista {
+    list-style: none; /* Remove marcadores da lista */
+    padding: 0; /* Remove padding padrão */
+    display: flex; /* Ativa flexbox */
+    justify-content: center; /* Centraliza itens */
+    gap: 2em; /* Espaçamento entre itens */
+    font-size: 1.2rem; /* Tamanho confortável */
+}
+
+/* RODAPÉ */
+.rodape {
+    background-color: #000000; /* Fundo preto */
+    padding: 2em 1em; /* Espaçamento interno */
+    text-align: center; /* Centraliza conteúdo */
+}
+
+.rodape__links {
+    list-style: none; /* Remove marcadores */
+    padding: 0; /* Remove padding padrão */
+    display: flex; /* Ativa flexbox */
+    flex-wrap: wrap; /* Permite quebrar linha */
+    justify-content: center; /* Centraliza itens */
+    gap: 1em; /* Espaçamento entre links */
+    margin-bottom: 1em; /* Espaçamento inferior */
+}
+
+.rodape__links a {
+    color: var(--branco-principal); /* Cor branca */
+    text-decoration: none; /* Remove sublinhado */
+    font-size: 0.9rem; /* Tamanho pequeno */
+}
+
+.rodape__links a:hover {
+    text-decoration: underline; /* Sublinhado ao passar o mouse */
+}
+
+.rodape__texto {
+    color: var(--cinza-secundario); /* Cor cinza claro */
+    font-size: 0.8rem; /* Fonte pequena */
+    margin-bottom: 1em; /* Espaçamento inferior */
+}
+
+/* ANIMAÇÃO GLOBAL */
+@keyframes fadeIn {
+    from { opacity: 0; } /* Começa invisível */
+    to { opacity: 1; } /* Termina visível */
+}

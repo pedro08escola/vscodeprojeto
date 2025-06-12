@@ -1,26 +1,118 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
+    <!-- Configuração da codificação de caracteres -->
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Configuração para o site ser responsivo -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aeroporto de Londrina</title> 
-<link rel="stylesheet" href="style.css">    
+    <!-- Título da página (aparece na aba do navegador) -->
+    <title>Premiere + Gamepass</title>
+    <!-- Link para o CSS externo -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Conexão com o Google Fonts para carregar a fonte Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Fonte Inter carregada -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
-<header></header>
-<main>
-<div class="container-botoes">
-    <h1>Reforma no aeroporto de Londrina (ldb, icao: sblo)no valor de R$: 180 milhões</h1>
-   <p> Novas pistas de taxiação para melhorar o fluxo de aeronaves.
-    Um novo pátio destinado à aviação comercial.
-    Um terminal de passageiros de 11.500 m² com 4 pontes de embarque e 2 posições remotas (finger)  para operações.
-    Readequação do terminal atual para uso exclusivo da aviação geral.</p>
-    <button class="botao-personalizado"><a href="https://github.com/pedro08escola" target="_blank" rel="noopener noreferrer">Github</a></button>
-    <button class="botao-personalizado2"><a href="https://www.youtube.com/watch?v=jBtWBGjQvgM" target="_blank" rel="noopener noreferrer">Youtube</a></button>
-</div>
-    <img src="Projeto vs code.png" alt="">
-</main>
-    
+
+    <!-- SEÇÃO 1: CAPA / CHAMADA PRINCIPAL -->
+    <section class="container principal">
+        <div class="container__caixa">
+            <!-- Título principal da capa -->
+            <h1 class="container__titulo">Combo Premiere + Gamepass</h1>
+            <!-- Subtítulo da capa -->
+            <p class="container__subtitulo">Assine já</p>
+            <!-- Botão principal de assinatura -->
+            <a class="container__botao" href="#">Assine por 12x de R$ 99,90</a>
+            <!-- Botão secundário com outra opção -->
+            <a class="container__botao botao__secundario" href="#">Assinar somente o Premiere</a>
+            <!-- Aviso de variação de preço -->
+            <p class="container__aviso">*O preço pode variar caso a assinatura seja feita em outros planos.</p>
+        </div>
+    </section>
+
+    <!-- SEÇÃO 2: PLATAFORMAS -->
+    <section class="container secundaria">
+        <!-- Imagem da seção -->
+        <img src="img/Plataformas.png" alt="Dispositivos disponíveis" class="secundaria__imagem">
+        <div class="container__descricao">
+            <!-- Título da seção -->
+            <h2 class="descricao__titulo">Assista do seu jeito</h2>
+            <!-- Descrição da seção -->
+            <p class="descricao__texto">
+                Aproveite a tela grande da TV ou assista no tablet, laptop, celular e outros aparelhos. Nossa seleção de cursos não para de crescer.
+            </p>
+        </div>
+    </section>
+
+    <!-- SEÇÃO 3: BENEFÍCIOS -->
+    <section class="container beneficios">
+        <!-- Título da seção -->
+        <h2 class="beneficios__titulo">Só o Combo+ oferece Premiere + Gamepass</h2>
+        <!-- Descrição dos benefícios -->
+        <p class="beneficios__texto">
+            Aproveite os jogos do seu time favorito, todos os jogos do Brasileirão e jogue online de qualquer lugar com todos os jogos na nuvem.
+        </p>
+        <!-- Botão para assinar o combo -->
+        <a class="container__botao" href="#">Assine o combo</a>
+    </section>
+
+    <!-- SEÇÃO 4: DOWNLOAD -->
+    <section class="container download">
+        <div class="container__descricao">
+            <!-- Título da seção -->
+            <h2 class="descricao__titulo">Baixe seus jogos favoritos</h2>
+            <!-- Descrição da seção -->
+            <p class="descricao__texto">
+                Baixe e jogue quando e onde quiser. Assim, seus jogos favoritos estão sempre com você, até mesmo sem internet.
+            </p>
+        </div>
+        <!-- Imagem da seção -->
+        <img src="img/Download.png" alt="Imagem de download" class="secundaria__imagem">
+    </section>
+
+    <!-- SEÇÃO 5: DISPOSITIVOS COMPATÍVEIS -->
+    <section class="container dispositivos">
+        <!-- Título da seção -->
+        <h2 class="descricao__titulo">Disponível nos seus dispositivos favoritos</h2>
+        <!-- Lista de dispositivos -->
+        <ul class="dispositivos__lista">
+            <li>TV</li>
+            <li>Computadores</li>
+            <li>Celulares e tablets</li>
+        </ul>
+    </section>
+
+    <!-- RODAPÉ -->
+    <footer class="rodape">
+        <!-- Lista de links do rodapé -->
+        <ul class="rodape__links">
+            <li><a href="#">Premiere + Xbox Gamepass</a></li>
+            <li><a href="#">Idioma</a></li>
+            <li><a href="#">Dispositivos compatíveis</a></li>
+            <li><a href="#">Contrato de assinatura</a></li>
+            <li><a href="#">Política de privacidade</a></li>
+            <li><a href="#">Proteção de dados no Brasil</a></li>
+            <li><a href="#">Anúncios personalizados</a></li>
+            <li><a href="#">Ajuda</a></li>
+        </ul>
+
+        <!-- Informações legais e direitos -->
+        <p class="rodape__texto">
+            ® 2025 Premiere + Xbox Gamepass. Todos os direitos reservados. Serviço de assinatura paga. Conteúdo sujeito a disponibilidade.
+        </p>
+        <p class="rodape__texto">
+            Site adaptado da Alura, inspirado no Premiere e Xbox Gamepass. Premiere+ é um serviço pago, baseado em assinatura e sujeito a termos e condições.
+        </p>
+        <p class="rodape__texto">
+            O serviço Premiere+ Gamepass é comercializado por P Sistemas de Informática S.A., Rua Pirataria, 918 - Londrina, Paraná - PR, 86101-300, Brasil - CNPJ 02.856.447/0001-92
+        </p>
+    </footer>
+
 </body>
+
 </html>
