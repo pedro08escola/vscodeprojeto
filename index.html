@@ -4,47 +4,67 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Premier + Xbox</title>
-    <link rel="stylesheet" href="style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
       rel="stylesheet"
     />
+    <style>
+      @import url("style.css");
+    </style>
   </head>
   <body>
+    <input type="checkbox" id="condicao-modal" />
+    <div class="modal-container">
+      <div class="modal_content">
+        <label for="condicao-modal" class="seta-voltar"></label>
+        <h2 class="modal_titulo">Escolha sua assinatura</h2>
+        <a href="https://premiere.globo.com/" class="modal_botao">
+          Assinar Premiere+
+        </a>
+        <a
+          href="https://www.xbox.com/pt-br/play"
+          class="modal_botao modal_botao--xbox"
+        >
+          Assinar Xbox Game Pass+
+        </a>
+      </div>
+    </div>
+
     <section class="container principal">
       <div class="container__caixa">
         <h1 class="container__titulo">
           Com o Combo+, você pode aproveitar o Premiere+ e o Xbox Game Pass por
           um preço único.
         </h1>
-        <img
-          src="img/Combo.png"
-          alt="Com o Combo+ você pode aproveitar
-            a Alura+ e o Alura Línguas"
-          class="container__imagem"
-        />
+        <div class="container__imagem">
+          <img
+            src="img/Combo.png"
+            alt="Com o Combo+ você pode aproveitar a Alura+ e o Alura Línguas"
+          />
+        </div>
         <a class="container__botao" href="https://www.xbox.com/pt-br/play"
-          >Assine por 12x de R$ 79,90*</a
-        >
-        <a
-          href="https://premiere.globo.com/ "
-          class="container__botao botao__secundario"
-        >
-          Assinar somente Premiere
+          >Assine por 12x de R$ 79,90*
         </a>
+
+        <label for="condicao-modal" class="botao-abrir-modal">
+          Assinar somente Premiere ou Xbox
+        </label>
         <p class="container__aviso">
           *O preço pode variar caso a assinatura seja feita em outros planos.
         </p>
       </div>
     </section>
     <section class="container secundaria">
-      <img
-        src="img/Imagem jogue olhe  do seu jeito.png"
-        alt="Imagem de celular assisata do seu jeito"
-        class="secundaria__imagem"
-      />
+      <div class="secundaria__imagem">
+        <img
+          src="img/Imagem jogue olhe do seu jeito.png"
+          alt="Imagem de celular
+        assisata do seu jeito"
+          class="secundaria__imagem"
+        />
+      </div>
       <div class="container__descricao">
         <h2 class="descricao__titulo">Assista do seu jeito</h2>
         <p class="descricao__texto">
@@ -54,11 +74,13 @@
       </div>
     </section>
     <section class="container secundaria">
-      <img
-        src="img/Game pass imegem.png"
-        alt="Imagem da game pass ultimate"
-        class="secundaria__imagem"
-      />
+      <div class="secundaria__imagem">
+        <img
+          src="img/Game pass imegem.png"
+          alt="Imagem da game pass ultimate"
+          class="secundaria__imagem"
+        />
+      </div>
       <div class="container__descricao">
         <h2 class="descricao__titulo">Baixe seus jogos favoritos</h2>
         <p class="descricao__texto">
