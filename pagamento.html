@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Finalizar Compra - Premiere+ Xbox Game Pass</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-green: #00c851;
+        --xbox-green: #107c10;
+        --dark-bg: #0a0e1a;
+        --card-bg: #1a1f2e;
+        --text-primary: #ffffff;
+        --text-secondary: #b0b0b0;
+        --border-color: #2a2f3e;
+        --error-color: #ff4757;
+        --success-color: #2ed573;
+        --warning-color: #ffa500;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Inter", sans-serif;
+        background: linear-gradient(
+          135deg,
+          var(--dark-bg) 0%,
+          var(--card-bg) 100%
+        );
+        color: var(--text-primary);
+        min-height: 100vh;
+        line-height: 1.6;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        display: grid;
+        grid-template-columns: 1fr 400px;
+        gap: 30px;
+        min-height: 100vh;
+        align-items: start;
+      }
+      .form-section,
+      .summary-section {
+        background: var(--card-bg);
+        border-radius: 16px;
+        padding: 30px;
+        border: 1px solid var(--border-color);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+      .summary-section {
+        position: sticky;
+        top: 20px;
+      }
+      .header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      .header h1 {
+        font-size: 28px;
+        font-weight: 700;
+        margin-bottom: 10px;
+        background: linear-gradient(
+          45deg,
+          var(--primary-green),
+          var(--xbox-green)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .header p {
+        color: var(--text-secondary);
+        font-size: 16px;
+      }
+      .form-group {
+        margin-bottom: 25px;
+        position: relative;
+      }
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+      }
+      .form-group input,
+      .form-group select {
+        width: 100%;
+        padding: 14px 16px;
+        background: var(--dark-bg);
+        border: 2px solid var(--border-color);
+        border-radius: 8px;
+        color: var(--text-primary);
+        font-size: 16px;
+        transition: all 0.3s ease;
+      }
+      .form-group input:focus,
+      .form-group select:focus {
+        outline: none;
+        border-color: var(--primary-green);
+        box-shadow: 0 0 0 3px rgba(0, 200, 81, 0.1);
+      }
+      .form-group input.error {
+        border-color: var(--error-color);
+      }
+      .form-group input.success {
+        border-color: var(--success-color);
+      }
+      .error-message,
+      .success-message {
+        font-size: 14px;
+        margin-top: 5px;
+        display: none;
+      }
+      .error-message {
+        color: var(--error-color);
+      }
+      .success-message {
+        color: var(--success-color);
+      }
+      .payment-methods h3 {
+        margin-bottom: 15px;
+        font-size: 18px;
+        font-weight: 600;
+      }
+      .payment-options {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+      .payment-option input[type="radio"] {
+        display: none;
+      }
+      .payment-option label {
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        background: var(--dark-bg);
+        border: 2px solid var(--border-color);
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 500;
+      }
+      .payment-option input[type="radio"]:checked + label {
+        border-color: var(--primary-green);
+        background: rgba(0, 200, 81, 0.1);
+      }
+      .payment-icon {
+        width: 24px;
+        height: 24px;
+        margin-right: 10px;
+        background: var(--primary-green);
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 12px;
+      }
+      .payment-section {
+        display: none;
+        margin-top: 20px;
+        padding: 20px;
+        background: var(--dark-bg);
+        border-radius: 8px;
+      }
+      .payment-section.active {
+        display: block;
+      }
+      .qr-code,
+      .barcode {
+        width: 200px;
+        height: 200px;
+        background: white;
+        margin: 20px auto;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #000;
+        font-weight: bold;
+      }
+      .barcode {
+        height: 80px;
+        font-size: 12px;
+        flex-direction: column;
+      }
+      .code-display {
+        background: var(--card-bg);
+        padding: 15px;
+        border-radius: 8px;
+        margin: 15px 0;
+        font-family: monospace;
+        word-break: break-all;
+        border: 1px solid var(--border-color);
+      }
+      .copy-button {
+        background: var(--primary-green);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+      .copy-button:hover {
+        background: #00a844;
+        transform: translateY(-2px);
+      }
+      .card-input-group {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 10px;
+        align-items: end;
+      }
+      .card-brand {
+        width: 50px;
+        height: 32px;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        font-weight: bold;
+        margin-top: 8px;
+        background: var(--border-color);
+        border: 1px solid var(--border-color);
+        overflow: hidden;
+      }
+      .card-brand img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        border-radius: 4px;
+      }
+      .card-brand.visa {
+        background: #1a1f71;
+        color: white;
+      }
+      /* .card-brand.mastercard {
+        background: #eb001b;
+        color: white;
+      } */
+      .card-brand.amex {
+        background: #006fcf;
+        color: white;
+      }
+      /* .card-brand.elo {
+        background: #ffcc00;
+        color: black;
+      } */
+      .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+      }
+      .installments-info {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 15px;
+        margin-top: 10px;
+      }
+      .installments-info h4 {
+        color: var(--primary-green);
+        margin-bottom: 10px;
+        font-size: 14px;
+      }
+      .installment-option {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
+        border-bottom: 1px solid var(--border-color);
+      }
+      .installment-option:last-child {
+        border-bottom: none;
+      }
+      .installment-label {
+        font-size: 14px;
+      }
+      .installment-fee {
+        font-size: 12px;
+        color: var(--text-secondary);
+      }
+      .no-fee {
+        color: var(--success-color);
+        font-weight: 500;
+      }
+      .with-fee {
+        color: var(--warning-color);
+      }
+      .submit-button {
+        width: 100%;
+        background: linear-gradient(
+          45deg,
+          var(--primary-green),
+          var(--xbox-green)
+        );
+        color: white;
+        border: none;
+        padding: 16px;
+        border-radius: 8px;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .submit-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(0, 200, 81, 0.3);
+      }
+      .submit-button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+      }
+      .product-info {
+        text-align: center;
+        margin-bottom: 25px;
+      }
+      .product-logo {
+        width: 120px;
+        height: 60px;
+        background: linear-gradient(
+          45deg,
+          var(--primary-green),
+          var(--xbox-green)
+        );
+        border-radius: 8px;
+        margin: 0 auto 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        font-size: 14px;
+      }
+      .product-name {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+      .product-description {
+        color: var(--text-secondary);
+        font-size: 14px;
+        line-height: 1.5;
+      }
+      .price-breakdown {
+        margin-bottom: 25px;
+      }
+      .price-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        padding: 10px 0;
+      }
+      .price-item.total {
+        border-top: 2px solid var(--border-color);
+        padding-top: 15px;
+        font-weight: 600;
+        font-size: 18px;
+        color: var(--primary-green);
+      }
+      .security-badge {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+        color: var(--text-secondary);
+        font-size: 14px;
+      }
+      .security-icon {
+        width: 16px;
+        height: 16px;
+        background: var(--success-color);
+        border-radius: 50%;
+        margin-right: 8px;
+      }
+      @media (max-width: 768px) {
+        .container {
+          grid-template-columns: 1fr;
+          gap: 20px;
+          padding: 15px;
+        }
+        .form-section,
+        .summary-section {
+          padding: 20px;
+        }
+        .payment-options {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="form-section">
+        <div class="header">
+          <h1>Finalizar Compra</h1>
+          <p>Complete seus dados para finalizar a assinatura</p>
+        </div>
+        <form id="paymentForm">
+          <div class="form-group">
+            <label for="nome">Nome Completo</label>
+            <input type="text" id="nome" name="nome" required />
+            <div class="error-message" id="nomeError">
+              Por favor, insira seu nome completo
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="cpf">CPF</label>
+            <input
+              type="text"
+              id="cpf"
+              name="cpf"
+              placeholder="000.000.000-00"
+              required
+            />
+            <div class="error-message" id="cpfError">CPF inválido</div>
+            <div class="success-message" id="cpfSuccess">CPF válido ✓</div>
+          </div>
+          <div class="form-group">
+            <label for="telefone">Telefone</label>
+            <input
+              type="tel"
+              id="telefone"
+              name="telefone"
+              placeholder="(00) 00000-0000"
+              required
+            />
+            <div class="error-message" id="telefoneError">
+              Telefone inválido
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" required />
+            <div class="error-message" id="emailError">E-mail inválido</div>
+          </div>
+          <div class="payment-methods">
+            <h3>Forma de Pagamento</h3>
+            <div class="payment-options">
+              <div class="payment-option">
+                <input type="radio" id="pix" name="payment" value="pix" />
+                <label for="pix"
+                  ><div class="payment-icon">PIX</div>
+                  PIX</label
+                >
+              </div>
+              <div class="payment-option">
+                <input
+                  type="radio"
+                  id="credito"
+                  name="payment"
+                  value="credito"
+                />
+                <label for="credito"
+                  ><div class="payment-icon">💳</div>
+                  Crédito</label
+                >
+              </div>
+              <div class="payment-option">
+                <input type="radio" id="debito" name="payment" value="debito" />
+                <label for="debito"
+                  ><div class="payment-icon">💳</div>
+                  Débito</label
+                >
+              </div>
+              <div class="payment-option">
+                <input type="radio" id="boleto" name="payment" value="boleto" />
+                <label for="boleto"
+                  ><div class="payment-icon">📄</div>
+                  Boleto</label
+                >
+              </div>
+            </div>
+          </div>
+          <div class="payment-section" id="pixSection">
+            <h3>Pagamento via PIX</h3>
+            <p>Escaneie o QR Code ou copie o código PIX</p>
+            <div class="qr-code">
+              <div style="text-align: center">
+                <div style="font-size: 12px; margin-bottom: 5px">
+                  QR CODE PIX
+                </div>
+                <div>
+                  <img
+                    src="img/qrcodepix.jpg"
+                    alt="Meu QR Code Personalizado"
+                    style="width: 200px; height: 200px"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="code-display">114ed7f3-cc78-4264-848c-8d272a50f535</div>
+            <button
+              type="button"
+              class="copy-button"
+              onclick="copyCode('.code-display')"
+            >
+              📋 Copiar Código PIX
+            </button>
+          </div>
+          <div class="payment-section" id="boletoSection">
+            <h3>Pagamento via Boleto</h3>
+            <p>Copie o código de barras abaixo</p>
+            <div class="barcode">
+              <div>CÓDIGO DE BARRAS</div>
+              <div>|||| | ||| || | ||||</div>
+            </div>
+            <div class="code-display">
+              23793.39126 60000.012345 67890.123456 8 98760000079990
+            </div>
+            <button
+              type="button"
+              class="copy-button"
+              onclick="copyCode('#boletoSection .code-display')"
+            >
+              📋 Copiar Código de Barras
+            </button>
+          </div>
+          <div class="payment-section" id="creditoSection">
+            <h3>Dados do Cartão de Crédito</h3>
+            <div class="form-group">
+              <label for="cardNumber">Número do Cartão</label>
+              <div class="card-input-group">
+                <input
+                  type="text"
+                  id="cardNumber"
+                  placeholder="0000 0000 0000 0000"
+                  maxlength="19"
+                />
+                <div class="card-brand" id="cardBrand"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="cardName">Nome no Cartão</label>
+              <input
+                type="text"
+                id="cardName"
+                placeholder="Nome como impresso no cartão"
+              />
+            </div>
+            <div class="grid-2">
+              <div class="form-group">
+                <label for="cardExpiry">Validade</label>
+                <input
+                  type="text"
+                  id="cardExpiry"
+                  placeholder="MM/AA"
+                  maxlength="5"
+                />
+              </div>
+              <div class="form-group">
+                <label for="cardCVV">CVV</label>
+                <input
+                  type="text"
+                  id="cardCVV"
+                  placeholder="123"
+                  maxlength="4"
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="installments">Parcelas</label>
+              <select id="installments">
+                <option value="1">1x de R$ 479,40 (à vista)</option>
+                <option value="2">2x de R$ 239,70 (sem juros)</option>
+                <option value="3">3x de R$ 159,80 (sem juros)</option>
+                <option value="4">4x de R$ 119,85 (c/ juros 2,49% a.m.)</option>
+                <option value="5">5x de R$ 95,88 (c/ juros 2,49% a.m.)</option>
+                <option value="6">6x de R$ 79,90 (c/ juros 2,49% a.m.)</option>
+                <option value="7">7x de R$ 68,48 (c/ juros 2,49% a.m.)</option>
+                <option value="8">8x de R$ 59,92 (c/ juros 2,49% a.m.)</option>
+                <option value="9">9x de R$ 53,26 (c/ juros 2,49% a.m.)</option>
+                <option value="10">
+                  10x de R$ 47,94 (c/ juros 2,49% a.m.)
+                </option>
+                <option value="11">
+                  11x de R$ 43,58 (c/ juros 2,49% a.m.)
+                </option>
+                <option value="12" selected>
+                  12x de R$ 39,95 (c/ juros 2,49% a.m.)
+                </option>
+              </select>
+            </div>
+            <div class="installments-info">
+              <h4>💡 Informações sobre Parcelamento</h4>
+              <div class="installment-option">
+                <span class="installment-label">1x à 3x</span>
+                <span class="installment-fee no-fee">Sem juros</span>
+              </div>
+              <div class="installment-option">
+                <span class="installment-label">4x à 12x</span>
+                <span class="installment-fee with-fee"
+                  >Juros de 2,49% a.m.</span
+                >
+              </div>
+            </div>
+          </div>
+          <div class="payment-section" id="debitoSection">
+            <h3>Dados do Cartão de Débito</h3>
+            <div class="form-group">
+              <label for="debitCardNumber">Número do Cartão</label>
+              <div class="card-input-group">
+                <input
+                  type="text"
+                  id="debitCardNumber"
+                  placeholder="0000 0000 0000 0000"
+                  maxlength="19"
+                />
+                <div class="card-brand" id="debitCardBrand"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="debitCardName">Nome no Cartão</label>
+              <input
+                type="text"
+                id="debitCardName"
+                placeholder="Nome como impresso no cartão"
+              />
+            </div>
+            <div class="grid-2">
+              <div class="form-group">
+                <label for="debitCardExpiry">Validade</label>
+                <input
+                  type="text"
+                  id="debitCardExpiry"
+                  placeholder="MM/AA"
+                  maxlength="5"
+                />
+              </div>
+              <div class="form-group">
+                <label for="debitCardCVV">CVV</label>
+                <input
+                  type="text"
+                  id="debitCardCVV"
+                  placeholder="123"
+                  maxlength="4"
+                />
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="submit-button">Finalizar Compra</button>
+        </form>
+      </div>
+      <div class="summary-section">
+        <div class="product-info">
+          <div class="product-logo">COMBO+</div>
+          <div class="product-name">Premiere+ Xbox Game Pass</div>
+          <div class="product-description">
+            Acesso completo ao Premiere+ para assistir os melhores jogos e Xbox
+            Game Pass com mais de 500 jogos disponíveis.
+          </div>
+        </div>
+        <div class="price-breakdown">
+          <div class="price-item">
+            <span>Premiere+ (12 meses)</span><span>R$ 239,70</span>
+          </div>
+          <div class="price-item">
+            <span>Xbox Game Pass (12 meses)</span><span>R$ 239,70</span>
+          </div>
+          <div class="price-item">
+            <span>Desconto Combo+</span
+            ><span style="color: var(--success-color)">-R$ 0,00</span>
+          </div>
+          <div class="price-item total">
+            <span>Total</span><span id="totalPrice">12x R$ 39,95</span>
+          </div>
+        </div>
+        <div class="security-badge">
+          <div class="security-icon"></div>
+          <span>Pagamento 100% seguro</span>
+        </div>
+      </div>
+    </div>
+    <script>
+      const formatCPF = (cpf) =>
+        cpf
+          .replace(/\D/g, "")
+          .replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+      const formatTelefone = (tel) =>
+        tel.replace(/\D/g, "").replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
+      const formatCard = (card) =>
+        card.replace(/\D/g, "").replace(/(\d{4})(?=\d)/g, "$1 ");
+      const formatExpiry = (exp) =>
+        exp.replace(/\D/g, "").replace(/(\d{2})(\d{2})/, "$1/$2");
+
+      const validaCPF = (cpf) => {
+        cpf = cpf.replace(/\D/g, "");
+        if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
+        let sum = 0;
+        for (let i = 0; i < 9; i++) sum += parseInt(cpf.charAt(i)) * (10 - i);
+        let remainder = 11 - (sum % 11);
+        if (remainder === 10 || remainder === 11) remainder = 0;
+        if (remainder !== parseInt(cpf.charAt(9))) return false;
+        sum = 0;
+        for (let i = 0; i < 10; i++) sum += parseInt(cpf.charAt(i)) * (11 - i);
+        remainder = 11 - (sum % 11);
+        if (remainder === 10 || remainder === 11) remainder = 0;
+        return remainder === parseInt(cpf.charAt(10));
+      };
+
+      const getCardBrand = (number) => {
+        const num = number.replace(/\D/g, "");
+        if (/^4/.test(num))
+          return {
+            brand: "VISA",
+            class: "visa",
+            image:
+              "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/200px-Visa_Inc._logo.svg.png",
+          };
+        if (/^5[1-5]/.test(num) || /^2[2-7]/.test(num))
+          return {
+            brand: "MASTER",
+            class: "mastercard",
+            image:
+              "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/200px-Mastercard-logo.svg.png",
+          };
+        if (/^3[47]/.test(num))
+          return {
+            brand: "AMEX",
+            class: "amex",
+            image:
+              "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/American_Express_logo_%282018%29.svg/200px-American_Express_logo_%282018%29.svg.png",
+          };
+        if (/^6[35]/.test(num))
+          return {
+            brand: "ELO",
+            class: "elo",
+            image:
+              "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Elo_logo.svg/200px-Elo_logo.svg.png0",
+          };
+        return { brand: "", class: "", image: "" };
+      };
+
+      const updateCardBrand = (input, brandElement) => {
+        const { brand, class: brandClass, image } = getCardBrand(input.value);
+
+        if (brand && image) {
+          brandElement.innerHTML = `<img src="${image}" alt="${brand}" />`;
+          brandElement.className = `card-brand ${brandClass}`;
+          brandElement.style.display = "flex";
+        } else if (brand) {
+          brandElement.textContent = brand;
+          brandElement.className = `card-brand ${brandClass}`;
+          brandElement.style.display = "flex";
+        } else {
+          brandElement.style.display = "none";
+        }
+      };
+
+      const updateTotalPrice = (installments) => {
+        const totalElement = document.getElementById("totalPrice");
+        const installmentValue = document.querySelector(
+          `#installments option[value="${installments}"]`
+        ).textContent;
+
+        if (installments == 1) {
+          totalElement.textContent = "R$ 479,40 à vista";
+        } else {
+          const match = installmentValue.match(/(\d+)x de R\$ ([\d,]+)/);
+          if (match) {
+            totalElement.textContent = `${match[1]}x R$ ${match[2]}`;
+          }
+        }
+      };
+
+      const copyCode = (selector) => {
+        const code = document.querySelector(selector).textContent;
+        navigator.clipboard.writeText(code).then(() => {
+          const button = event.target;
+          const originalText = button.textContent;
+          button.textContent = "✓ Copiado!";
+          button.style.background = "var(--success-color)";
+          setTimeout(() => {
+            button.textContent = originalText;
+            button.style.background = "var(--primary-green)";
+          }, 2000);
+        });
+      };
+
+      // Event Listeners
+      document.getElementById("cpf").addEventListener("input", function (e) {
+        let cpf = e.target.value.replace(/\D/g, "");
+        e.target.value = formatCPF(cpf);
+        const cpfError = document.getElementById("cpfError");
+        const cpfSuccess = document.getElementById("cpfSuccess");
+        if (cpf.length === 11) {
+          if (validaCPF(cpf)) {
+            e.target.classList.remove("error");
+            e.target.classList.add("success");
+            cpfError.style.display = "none";
+            cpfSuccess.style.display = "block";
+          } else {
+            e.target.classList.add("error");
+            e.target.classList.remove("success");
+            cpfError.style.display = "block";
+            cpfSuccess.style.display = "none";
+          }
+        } else {
+          e.target.classList.remove("error", "success");
+          cpfError.style.display = "none";
+          cpfSuccess.style.display = "none";
+        }
+      });
+
+      document
+        .getElementById("telefone")
+        .addEventListener(
+          "input",
+          (e) => (e.target.value = formatTelefone(e.target.value))
+        );
+
+      document.getElementById("cardNumber").addEventListener("input", (e) => {
+        e.target.value = formatCard(e.target.value);
+        updateCardBrand(e.target, document.getElementById("cardBrand"));
+      });
+
+      document
+        .getElementById("debitCardNumber")
+        .addEventListener("input", (e) => {
+          e.target.value = formatCard(e.target.value);
+          updateCardBrand(e.target, document.getElementById("debitCardBrand"));
+        });
+
+      document
+        .getElementById("cardExpiry")
+        .addEventListener(
+          "input",
+          (e) => (e.target.value = formatExpiry(e.target.value))
+        );
+
+      document
+        .getElementById("debitCardExpiry")
+        .addEventListener(
+          "input",
+          (e) => (e.target.value = formatExpiry(e.target.value))
+        );
+
+      document
+        .getElementById("cardCVV")
+        .addEventListener(
+          "input",
+          (e) => (e.target.value = e.target.value.replace(/\D/g, ""))
+        );
+
+      document
+        .getElementById("debitCardCVV")
+        .addEventListener(
+          "input",
+          (e) => (e.target.value = e.target.value.replace(/\D/g, ""))
+        );
+
+      // Event listener para atualizar o preço total conforme o parcelamento
+      document
+        .getElementById("installments")
+        .addEventListener("change", function (e) {
+          updateTotalPrice(e.target.value);
+        });
+
+      document.querySelectorAll('input[name="payment"]').forEach((radio) => {
+        radio.addEventListener("change", function () {
+          document
+            .querySelectorAll(".payment-section")
+            .forEach((section) => section.classList.remove("active"));
+          const section = document.getElementById(this.value + "Section");
+          if (section) section.classList.add("active");
+
+          // Atualizar preço baseado no método de pagamento
+          const totalElement = document.getElementById("totalPrice");
+          if (
+            this.value === "pix" ||
+            this.value === "boleto" ||
+            this.value === "debito"
+          ) {
+            totalElement.textContent = "R$ 958,80 à vista";
+          } else if (this.value === "credito") {
+            const selectedInstallment =
+              document.getElementById("installments").value;
+            updateTotalPrice(selectedInstallment);
+          }
+        });
+      });
+
+      document
+        .getElementById("paymentForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const submitButton = document.querySelector(".submit-button");
+          submitButton.disabled = true;
+          submitButton.textContent = "Processando...";
+          setTimeout(() => {
+            alert(
+              "Compra realizada com sucesso! Você receberá um e-mail com os detalhes da sua assinatura."
+            );
+            submitButton.disabled = false;
+            submitButton.textContent = "Finalizar Compra";
+          }, 2000);
+        });
+
+      // Inicializar o preço total
+      updateTotalPrice(document.getElementById("installments").value);
+    </script>
+  </body>
+</html>
